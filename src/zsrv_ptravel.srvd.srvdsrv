@@ -1,0 +1,4 @@
+@EndUserText.label: 'SERVICE DEFINITION FOR TRAVEL'
+define service ZSRV_PTRAVEL {
+  expose ZC_TRAVEL;
+}

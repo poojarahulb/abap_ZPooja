@@ -1,0 +1,9 @@
+@Metadata.layer: #CUSTOMER
+annotate entity ZC_TRAVEL with
+{
+
+@UI.lineItem: [{ position: 10 , label: 'Travel Customer' }]
+  TravelId;
+  
+
+}
