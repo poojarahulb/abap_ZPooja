@@ -1,0 +1,42 @@
+@Metadata.layer: #CORE
+annotate entity ZPC_TRAVEL_PROCESSOR_M with
+{
+  @UI.lineItem: [{ position: 10 }]
+  TravelID;
+
+  @UI.lineItem: [{ position: 20 }]
+  AgencyID;
+  //AgencyName;
+
+  @UI.lineItem: [{ position: 30 }]
+  CustomerID;
+  //CustomerName;
+
+  @UI.lineItem: [{ position: 40 }]
+  BeginDate;
+
+  @UI.lineItem: [{ position: 50 }]
+  EndDate;
+
+  //BookingFee;
+
+  @UI.lineItem: [{ position: 60 }]
+  TotalPrice;
+  //CurrencyCode;
+
+  @UI.lineItem: [{ position: 70 }]
+  OverallStatus;
+
+
+  //OverallStatusText;
+  //Description;
+  //LastChangedAt;
+
+
+  /* Associations */
+  //  _Agency;
+  //  _Booking;
+  //  _Customer;
+  //  _OverallStatus;
+
+}
