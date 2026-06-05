@@ -25,6 +25,7 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
   //CurrencyCode;
 
   @UI.lineItem: [{ position: 70 }]
+  @UI.textArrangement: #TEXT_FIRST
   OverallStatus;
 
 
