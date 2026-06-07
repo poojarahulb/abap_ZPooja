@@ -5,7 +5,72 @@
     typeNamePlural: 'Travel List' // header text for main list page
 }
 
+//selection variant
+@UI.selectionVariant: [{
+    qualifier: '
+',
+    text: 'All'
+},
+{
+    qualifier: 'SV_Open',
+    text: 'Open',
+    filter: 'OverallStatus EQ "O" '
+},
+{
+    qualifier: 'SV_Accepted',
+    text: 'Accepted',
+    filter: 'OverallStatus EQ "A" '
+}
+]
+
+//presentation variant
+@UI.presentationVariant: [{
+    qualifier: 'PV_All',
+    text: 'All',
+    maxItems: 200,
+    sortOrder: [{
+        by: 'TravelID',
+        direction: #DESC
+    }],
+    groupBy: [ 'AgencyID' ],
+    requestAtLeast: [ 'TravelID', 'OverallStatus' ],
+    visualizations: [{
+        type: #AS_LINEITEM
+    }],
+    selectionFieldsQualifier: 'SV_All'
+},
+{
+    qualifier: 'PV_Accepted',
+    text: 'Accepted',
+    maxItems: 200,
+    sortOrder: [{
+        by: 'CustomerName',
+        direction: #ASC
+    }],
+    groupBy: [ 'CustomerID' ],
+    requestAtLeast: [ 'TravelID', 'OverallStatus' ],
+    visualizations: [{
+        type: #AS_LINEITEM,
+        qualifier: 'Acc'
+    }],
+    selectionFieldsQualifier: 'SV_Accepted'
+}]
+
+//selectionpresentationvariant
+@UI.selectionPresentationVariant: [{
+    qualifier: 'SPV_All',
+    text: 'All',
+    selectionVariantQualifier: 'SV_All',
+    presentationVariantQualifier: 'PV_All'
+},
+{
+    qualifier: 'SPV_Accepted',
+    text: 'Accepted',
+    selectionVariantQualifier: 'SV_Accepted',
+    presentationVariantQualifier: 'PV_Accepted'
+}]
 annotate entity ZPC_TRAVEL_PROCESSOR_M with
+
 {
   @UI.lineItem: [{ position: 10 }]
   @Search.defaultSearchElement: true //Search if anyone enters data for this field
@@ -20,9 +85,9 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
         element: 'AgencyID'
         } }]
   AgencyID;
-  //AgencyName;
+  // AgencyName;
 
-  @UI.lineItem: [{ position: 30 }]
+  @UI.lineItem: [{ position: 30 ,qualifier: 'Acc'}]
   @UI.selectionField: [{  position: 20}]
   @Search.defaultSearchElement: true //Search if anyone enters data for this field
   @Consumption.valueHelpDefinition: [{ entity: {
@@ -30,25 +95,25 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
        element: 'CustomerID'
        } }]
   CustomerID;
-  //CustomerName;
+  // CustomerName;
 
-  @UI.lineItem: [{ position: 40 }]
+  @UI.lineItem: [ { position: 40 ,qualifier: 'Acc'} ]
   BeginDate;
 
-  @UI.lineItem: [{ position: 50 }]
+  @UI.lineItem: [ { position: 50 } ]
   EndDate;
 
-  //BookingFee;
+  // BookingFee;
 
-  @UI.lineItem: [{ position: 60 }]
+  @UI.lineItem: [ { position: 60 } ]
   //  @Consumption.valueHelpDefinition: [{ entity: {
   //       name: 'I_Currency',
   //       element: 'Currency'
   //       } }]
   TotalPrice;
-  //CurrencyCode;
+  // CurrencyCode;
 
-  //Here multiple annotation items are combined to a single line using :
+  // Here multiple annotation items are combined to a single line using :
   @UI: { lineItem: [{ position: 70 }],
   textArrangement: #TEXT_ONLY, //( remove status code ),
   selectionField: [{  position: 30}]}
@@ -58,17 +123,12 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
        element: 'OverallStatus'
        } }]
   OverallStatus;
-
-
-  //OverallStatusText;
-  //Description;
-  //LastChangedAt;
-
-
+  // OverallStatusText;
+  // Description;
+  // LastChangedAt;
   /* Associations */
   //  _Agency;
   //  _Booking;
   //  _Customer;
   //  _OverallStatus;
-
 }

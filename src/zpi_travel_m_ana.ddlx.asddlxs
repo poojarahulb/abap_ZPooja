@@ -1,0 +1,17 @@
+@Metadata.layer: #CORE
+
+@UI.selectionVariant: [{
+    qualifier: 'SVA_All',
+    text: 'Total By Agency Id'
+
+}]
+annotate entity ZPI_TRAVEL_M_ANA with
+{
+  @UI.lineItem: [{ position: 10 }]
+  AgencyID;
+  @UI.lineItem: [{ position: 20 }]
+  CurrencyCode;
+  @UI.lineItem: [{ position: 30 }]
+  TotalPrice;
+
+}

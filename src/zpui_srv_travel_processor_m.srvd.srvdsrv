@@ -15,4 +15,5 @@ define service ZPUI_SRV_TRAVEL_PROCESSOR_M {
   expose /DMO/I_Booking_Status_VH     as BookingStatus;
   expose I_CurrencyStdVH              as Currency;
   expose I_CountryVH                  as Country;
+  expose ZPI_TRAVEL_M_ANA             as travel_chart;
 }
