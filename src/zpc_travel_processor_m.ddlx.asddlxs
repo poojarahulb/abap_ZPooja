@@ -194,9 +194,5 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
   @UI.identification: [{ position: 90 }]
   Description;
   // LastChangedAt;
-  /* Associations */
-  //  _Agency;
-  //  _Booking;
-  //  _Customer;
-  //  _OverallStatus;
+  
 }
