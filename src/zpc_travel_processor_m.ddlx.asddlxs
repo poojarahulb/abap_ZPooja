@@ -1,14 +1,29 @@
 @Metadata.layer: #CORE
 @Search.searchable: true //( adding a search field )
-@UI.headerInfo:{
-    typeName: 'Travel Details', //header text for detail page
-    typeNamePlural: 'Travel List' // header text for main list page
+//@UI.headerInfo:{
+//    typeName: 'Travel Details', //header text for detail page
+//    typeNamePlural: 'Travel List' // header text for main list page
+//}
+
+//Header Info for Object Page
+
+@UI.headerInfo: {
+    typeName: 'Travel Details',
+    typeNamePlural: 'Travel List',
+    typeImageUrl: 'sap-icon://flight',
+    title: {
+        type: #STANDARD,
+        value: 'TravelID'
+    },
+    description: {
+        type: #STANDARD,
+        value: 'Description'
+    }
 }
 
 //selection variant
 @UI.selectionVariant: [{
-    qualifier: '
-',
+    qualifier: 'SV_All',
     text: 'All'
 },
 {
@@ -69,12 +84,43 @@
     selectionVariantQualifier: 'SV_Accepted',
     presentationVariantQualifier: 'PV_Accepted'
 }]
+
 annotate entity ZPC_TRAVEL_PROCESSOR_M with
 
 {
+
+  //Object page facets
+  @UI.facet: [{
+      purpose: #HEADER,
+      position: 10,
+      type: #DATAPOINT_REFERENCE,
+      targetQualifier: 'TotalPrice'
+      },
+      {
+      purpose: #HEADER,
+      position: 30,
+      type: #DATAPOINT_REFERENCE,
+      targetQualifier: 'Status'
+      },
+      {
+      purpose: #STANDARD, //1st tab in content section
+      position: 10,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Travel'
+      },
+      {
+      purpose: #STANDARD, 
+      position: 20,// 2nd tab in content section
+      type: #LINEITEM_REFERENCE,
+      label: 'Bookings',
+      targetElement: '_Booking'
+      }
+     ]
+
   @UI.lineItem: [{ position: 10 }]
   @Search.defaultSearchElement: true //Search if anyone enters data for this field
   @Search.fuzzinessThreshold: 0.7
+  @UI.identification: [{ position: 10 }]
   TravelID;
 
   @UI.lineItem: [{ position: 20 }] // show column for this field
@@ -84,6 +130,7 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
         name: '/DMO/I_Agency',
         element: 'AgencyID'
         } }]
+  @UI.identification: [{ position: 20 }]
   AgencyID;
   // AgencyName;
 
@@ -94,24 +141,33 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
        name: '/DMO/I_Customer',
        element: 'CustomerID'
        } }]
+  @UI.identification: [{ position: 30 }]
   CustomerID;
   // CustomerName;
 
-  @UI.lineItem: [ { position: 40 ,qualifier: 'Acc'} ]
+  @UI.lineItem: [ { position: 40, qualifier: 'Acc' } ]
+  @UI.identification: [{ position: 40 }]
   BeginDate;
 
   @UI.lineItem: [ { position: 50 } ]
+  @UI.identification: [{ position: 50 }]
   EndDate;
 
   // BookingFee;
-
-  @UI.lineItem: [ { position: 60 } ]
+  
+  
+  // data point to define the qualifier for facet above
+  @UI: { dataPoint: { qualifier: 'TotalPrice', title: 'Total Price' },
+         lineItem:  [ { position: 60 } ] }
+  @UI.identification: [{ position: 60 }]
   //  @Consumption.valueHelpDefinition: [{ entity: {
   //       name: 'I_Currency',
   //       element: 'Currency'
   //       } }]
   TotalPrice;
-  // CurrencyCode;
+  
+  @UI.identification: [{ position: 70 }]
+  CurrencyCode;
 
   // Here multiple annotation items are combined to a single line using :
   @UI: { lineItem: [{ position: 70 }],
@@ -122,9 +178,21 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
        name: '/DMO/I_Overall_Status_VH',
        element: 'OverallStatus'
        } }]
+  @UI.identification: [{ position: 80 }]
+  // data point to define the qualifier for facet above
+  @UI.dataPoint:
+  {
+    qualifier: 'Status',
+    title: 'Status'
+  }
   OverallStatus;
+  
+  
   // OverallStatusText;
-  // Description;
+  
+  
+  @UI.identification: [{ position: 90 }]
+  Description;
   // LastChangedAt;
   /* Associations */
   //  _Agency;
