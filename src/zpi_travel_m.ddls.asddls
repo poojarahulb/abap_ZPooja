@@ -2,7 +2,7 @@
 @EndUserText.label: 'TRAVEL VIEW INTERFACE'
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZPI_TRAVEL_M
-  as select from ZPTRAVEL_M as Travel -- the travel table is the data source for this view
+  as select from zptravel_m as Travel -- the travel table is the data source for this view
 
   composition [0..*] of ZPI_BOOKING_M            as _Booking
 
@@ -23,6 +23,15 @@ define root view entity ZPI_TRAVEL_M
       total_price,
       currency_code,
       overall_status,
+
+      case overall_status
+      when 'O' then 2
+      when 'A' then 3
+      when 'X' then 1
+      else 0
+      end as OverallstatusCriticality,
+      
+      
       description,
       @Semantics.user.createdBy: true
       created_by,

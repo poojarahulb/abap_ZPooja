@@ -85,6 +85,8 @@
     presentationVariantQualifier: 'PV_Accepted'
 }]
 
+@UI.lineItem: [{ criticality: 'OverallstatusCriticality' }] // highlist start of each line in the table with the status colour
+
 annotate entity ZPC_TRAVEL_PROCESSOR_M with
 
 {
@@ -170,20 +172,21 @@ annotate entity ZPC_TRAVEL_PROCESSOR_M with
   CurrencyCode;
 
   // Here multiple annotation items are combined to a single line using :
-  @UI: { lineItem: [{ position: 70 }],
+  @UI: { lineItem: [{ position: 70 , criticality: 'OverallstatusCriticality'}], // colour of table column data based on status in list page
   textArrangement: #TEXT_ONLY, //( remove status code ),
-  selectionField: [{  position: 30}]}
+  selectionField: [{  position: 30}]}// filter control for this field
   @Search.defaultSearchElement: true //Search if anyone enters data for this field
   @Consumption.valueHelpDefinition: [{ entity: {
        name: '/DMO/I_Overall_Status_VH',
        element: 'OverallStatus'
        } }]
-  @UI.identification: [{ position: 80 }]
+  @UI.identification: [{ position: 80 , criticality: 'OverallstatusCriticality'}] // colour of content info based on status in object page
   // data point to define the qualifier for facet above
   @UI.dataPoint:
   {
     qualifier: 'Status',
-    title: 'Status'
+    title: 'Status',
+    criticality: 'OverallstatusCriticality' // colour of header info based on status in object page
   }
   OverallStatus;
   

@@ -29,7 +29,8 @@ define root view entity ZPC_TRAVEL_PROCESSOR_M
       @ObjectModel.text.element: [ 'OverallStatusText' ]
       overall_status            as OverallStatus,
       _OverallStatus._Text.Text as OverallStatusText : localized,
-
+      OverallstatusCriticality,
+      
       description               as Description,
       last_changed_at           as LastChangedAt,
 
