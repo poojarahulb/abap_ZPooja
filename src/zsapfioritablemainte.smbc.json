@@ -1,0 +1,40 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Maintain SAP Fiori Table Maintenance App using RA",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "serviceConfiguration": {
+    "serviceBinding": "ZUI_SAPFIORITABLEMAINTE_O4",
+    "serviceName": "ZUI_SAPFIORITABLEMAINTE_O4",
+    "serviceVersion": "0001",
+    "rootEntitySet": "SapFioriTableMaiAll",
+    "name": "SAP Fiori Table Maintenance App using RA",
+    "transportObject": "ZSAPFIORITABLEMAINTET",
+    "configurationGroup": "",
+    "skipRootEntity": true
+  },
+  "appConfiguration": {
+    "listReport": {},
+    "objectPages": [
+      {
+        "entitySet": "SapFioriTableMaiAll",
+        "variantManagement": "control",
+        "showTransportSelectionStrip": true
+      }
+    ],
+    "tableSettings": [
+      {
+        "entitySet": "SapFioriTableMainte",
+        "tableType": "gridTable",
+        "selectAll": true,
+        "rowCountMode": "auto",
+        "frozenColumnCount": 1,
+        "creationModeName": "inlineCreationRows",
+        "createAtEnd": true,
+        "widthIncludingColumnHeader": true
+      }
+    ]
+  }
+}

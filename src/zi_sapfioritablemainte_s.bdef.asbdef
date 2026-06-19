@@ -1,0 +1,102 @@
+managed with additional save implementation in class ZBP_I_SAPFIORITABLEMAINTE_S unique;
+strict ( 1 );
+with draft;
+define behavior for ZI_SapFioriTableMainte_S alias SapFioriTableMaiAll
+draft table ZSLS_CONFIG_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( features : instance )
+   TransportRequestID;
+
+  field ( notrigger )
+   SingletonID,
+   LastChangedAtMax;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit with additional implementation;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _SapFioriTableMainte { create ( features : instance ); with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT
+  {
+    create;
+    update;
+  }
+
+  side effects
+  {
+    action SelectCustomizingTransptReq affects
+        $self;
+  }
+
+}
+
+define behavior for ZI_SapFioriTableMainte alias SapFioriTableMainte ##UNMAPPED_FIELD
+persistent table ZSLS_CONFIG_TAB
+draft table ZSLS_CONFIG_T_D
+etag master LocalLastChangedAt
+lock dependent by _SapFioriTableMaiAll
+authorization dependent by _SapFioriTableMaiAll
+{
+  field ( mandatory : create )
+   ConfigId;
+
+  field ( readonly )
+   SingletonID,
+   LocalCreatedBy,
+   LocalCreatedAt,
+   LocalLastChangedBy,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+  field ( readonly : update )
+   ConfigId;
+
+  field ( notrigger )
+   SingletonID,
+   LocalCreatedBy,
+   LocalCreatedAt,
+   LocalLastChangedBy,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZSLS_CONFIG_TAB
+  {
+    ConfigId = CONFIG_ID;
+    Description = DESCRIPTION;
+    ConfigActive = CONFIG_ACTIVE;
+    LocalCreatedBy = LOCAL_CREATED_BY;
+    LocalCreatedAt = LOCAL_CREATED_AT;
+    LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt = LAST_CHANGED_AT;
+  }
+
+  association _SapFioriTableMaiAll { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT
+  {
+    create;
+    update;
+    delete;
+  }
+
+}

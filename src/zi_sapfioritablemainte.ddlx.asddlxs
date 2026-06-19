@@ -1,0 +1,44 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'SAP Fiori Table Maintenance App using RA', 
+    typeNamePlural: 'SAP Fiori Table Maintenance App using RA', 
+    title: {
+      type: #STANDARD, 
+      value: 'ConfigId'
+    }
+  }
+}
+annotate view ZI_SapFioriTableMainte with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'SapFioriTableMainte', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'SAP Fiori Table Maintenance App using RA', 
+    position: 1 
+  } ]
+  ConfigId;
+  
+  @UI.identification: [ {
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Description;
+  
+  @UI.identification: [ {
+    position: 3 
+  } ]
+  @UI.lineItem: [ {
+    position: 3 
+  } ]
+  ConfigActive;
+}

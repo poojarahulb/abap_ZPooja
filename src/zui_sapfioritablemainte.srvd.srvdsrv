@@ -1,0 +1,5 @@
+@ObjectModel.leadingEntity.name: 'ZI_SapFioriTableMainte_S'
+define service ZUI_SAPFIORITABLEMAINTE {
+  expose ZI_SAPFIORITABLEMAINTE_S as SapFioriTableMaiAll;
+  expose ZI_SAPFIORITABLEMAINTE as SapFioriTableMainte;
+}
